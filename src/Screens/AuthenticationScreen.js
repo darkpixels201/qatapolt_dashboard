@@ -28,7 +28,7 @@ const AuthenticationScreen = () => {
             alignItems: "center",
           }}
         >
-          <CustomText title="Don't Have any Account ? " fontSize={13} />
+          {/* <CustomText title="Don't Have any Account ? " fontSize={13} />
           <Spacer width={20} />
           <div
             style={{
@@ -50,12 +50,12 @@ const AuthenticationScreen = () => {
               fontSize={13}
               fontFamily={"bold"}
             />
-          </div>
+          </div> */}
         </div>
       </div>
       {showLogin ? <Login /> : ""}
 
-      <img
+      {/* <img
         src={loginBg1}
         style={{
           height: 450,
@@ -67,7 +67,7 @@ const AuthenticationScreen = () => {
           bottom: -10,
           objectFit: "cover",
         }}
-      />
+      /> */}
     </div>
   );
 };
