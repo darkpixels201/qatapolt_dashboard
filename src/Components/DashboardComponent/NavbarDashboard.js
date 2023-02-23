@@ -16,6 +16,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { IoReceiptOutline } from "react-icons/io5";
 import { BsReceiptCutoff } from "react-icons/bs";
 import NavbarMap from "./NavbarMap";
+import { colors } from "../../utils/Colors";
 
 const NavbarDashboard = () => {
   const menu = [
@@ -27,8 +28,8 @@ const NavbarDashboard = () => {
         icon: <RiProductHuntLine size={23} />,
       },
       subMenu: [
-        { name: "Products", path: "/dashboard/products" },
-        { name: "Add Products", path: "/dashboard/addproduct" },
+        { id:1, name: "Products", path: "/dashboard/products" },
+        { id:2,  name: "Add Products", path: "/dashboard/addproduct" },
       ],
     },
     {
@@ -68,7 +69,7 @@ const NavbarDashboard = () => {
     // fontSize: "30px",
     cursor: "pointer",
     // backgroundColor: isHover ? "lightblue" : "rgb(0, 191, 255)",
-    color: isHover ? "red" : "purple",
+    // color: isHover ? "red" : "purple",
   };
   const { toggleSidebar } = useProSidebar();
 
@@ -76,10 +77,11 @@ const NavbarDashboard = () => {
     <div>
       <Sidebar
         style={{ height: "100%", minHeight: "100vh" }}
-        rootStyles={{
-          background:
-            "linear-gradient(180deg, rgba(166,240,255,1) 0%, rgba(220,250,255,1) 49%, rgba(230,252,255,1) 100%)",
-        }}
+        backgroundColor={colors.lightBlack}
+        // rootStyles={{
+        //   background:
+        //     "linear-gradient(180deg, rgba(166,240,255,1) 0%, rgba(220,250,255,1) 49%, rgba(230,252,255,1) 100%)",
+        // }}
         breakPoint={window.innerWidth <= 450 ? "always" : null}
         defaultCollapsed={SubMenu ? false : true}
       >

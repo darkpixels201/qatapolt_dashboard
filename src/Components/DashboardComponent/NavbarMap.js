@@ -7,9 +7,12 @@ import {
   SubMenu,
   useProSidebar,
 } from "react-pro-sidebar";
+import { colors } from "../../utils/Colors";
+import "../../Assets/css/sideBar.css";
 
 const NavbarMap = ({ item }) => {
   const [isHover, setIsHover] = useState(false);
+  const [subIsHover, subSetIsHover] = useState(-1);
 
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -17,6 +20,14 @@ const NavbarMap = ({ item }) => {
 
   const handleMouseLeave = () => {
     setIsHover(false);
+  };
+
+  const subhandleMouseEnter = (i) => {
+    subSetIsHover(i);
+  };
+
+  const subhandleMouseLeave = () => {
+    subSetIsHover();
   };
   const boxStyle = {
     // height: "200px",
@@ -27,7 +38,20 @@ const NavbarMap = ({ item }) => {
     // fontSize: "30px",
     cursor: "pointer",
     // backgroundColor: isHover ? "lightblue" : "rgb(0, 191, 255)",
-    color: isHover ? "red" : "purple",
+    // color: isHover ? "red" : "purple",
+    color: colors.lightWhite,
+    backgroundColor: isHover ? colors.lightGrey : colors.lightBlack,
+    // opacity: 0.9,
+    opacity:isHover ? 0.9 : 1,
+  };
+
+  const subMenuBoxStyle = {
+    cursor: "pointer",
+    // backgroundColor: isHover ? "lightblue" : "rgb(0, 191, 255)",
+    // color: isHover ? "red" : "purple",
+    color: colors.lightWhite,
+    backgroundColor: colors.lightBlack,
+    opacity: 0.9,
   };
   const { toggleSidebar } = useProSidebar();
 
@@ -53,6 +77,10 @@ const NavbarMap = ({ item }) => {
         >
           {item.subMenu?.map((s, i) => (
             <MenuItem
+              className={subIsHover == i ? "cardHover" : ""}
+              onMouseEnter={() => subhandleMouseEnter(i)}
+              onMouseLeave={subhandleMouseLeave}
+              style={subMenuBoxStyle}
               onClick={() => {
                 window.innerWidth <= 450 ? toggleSidebar() : console.log("Yes");
               }}
@@ -60,14 +88,15 @@ const NavbarMap = ({ item }) => {
               key={i}
             >
               {s.name}
+              {/* {s.id} */}
             </MenuItem>
           ))}
         </SubMenu>
       ) : (
         <MenuItem
-        style={boxStyle}
+          style={boxStyle}
           onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
+          onMouseLeave={handleMouseLeave}
           onClick={() => {
             window.innerWidth <= 450 ? toggleSidebar() : console.log("Yes");
           }}
