@@ -29,6 +29,7 @@ function CustomButton(props) {
         cursor: "pointer",
       }}
       onClick={props.onClick}
+      onSubmit={props.onSubmit}
     >
       <div style={{ flexDirection: "row", paddingHorizontal: 20 }}>
         <div

@@ -1,13 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import productListArray from "../../../Components/ProductListArray";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  console.log(id);
+  console.log("UseparamID",id);
+
+  const productList = useSelector((state) => state.productReducer);
+  const { products, deleteProducts } = productList;
+  console.log("ReducerID", products)
   return (
     <div>
-      {productListArray.map((item, index) => (
+      {products.map((item, index) => (
         <div key={index}>
           {item.id == id ? (
             <>

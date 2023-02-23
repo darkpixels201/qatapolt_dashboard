@@ -1,11 +1,20 @@
 import { Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Form, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { createProduct } from "../../../Actions/ProductAction";
+// import { createProduct } from "../../../Actions/ProductAction";
 import CustomButton from "../../../Components/CustomComponents/CustomButton";
 import CustomText from "../../../Components/CustomComponents/CustomText";
 import Spacer from "../../../Components/CustomComponents/Spacer";
+import FormValidation from "../../../Components/FormValidation";
 import { colors } from "../../../utils/Colors";
 
 const AddProduct = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [state, setState] = useState({
     name: "",
     purchasePrice: "",
@@ -13,6 +22,19 @@ const AddProduct = () => {
     stock: "",
   });
 
+  const name = state.name;
+  const purchasePrice = state.purchasePrice;
+  const salePrice = state.salePrice;
+  const stock = state.stock;
+
+  const [submitError, setSubmitError] = useState({
+    nameError: "",
+    purchasePriceError: "",
+    salePriceError: "",
+    stockError: "",
+  });
+
+  // const response = FormValidation(setSubmitError,submitError,  ...state)
 
   const formArray = [
     {
@@ -20,35 +42,112 @@ const AddProduct = () => {
       name: "Name",
       xs: 12,
       md: 4,
-      onchange: (v) => setState({ ...state, name: v.target.value }),
+      onchange: (v) => {
+        setState({ ...state, name: v.target.value });
+        setSubmitError({ ...submitError, nameError: "" });
+      },
+      error: submitError.nameError,
     },
     {
       id: 1,
       name: "Purchase Price",
       xs: 12,
       md: 4,
-      onchange: (v) => setState({ ...state, purchasePrice: v.target.value }),
+      onchange: (v) => {
+        setState({ ...state, purchasePrice: v.target.value });
+        setSubmitError({ ...submitError, purchasePriceError: "" });
+      },
+      error: submitError.purchasePriceError,
     },
     {
       id: 1,
       name: "Sale Price",
       xs: 12,
       md: 4,
-      onchange: (v) => setState({ ...state, salePrice: v.target.value }),
+      onchange: (v) => {
+        setState({ ...state, salePrice: v.target.value });
+        setSubmitError({ ...submitError, salePriceError: "" });
+      },
+      error: submitError.salePriceError,
     },
     {
       id: 1,
       name: "Stock",
       xs: 12,
       md: 12,
-      onchange: (v) => setState({ ...state, stock: v.target.value }),
+      onchange: (v) => {
+        setState({ ...state, stock: v.target.value });
+        setSubmitError({ ...submitError, stockError: "" });
+      },
+      error: submitError.stockError,
     },
   ];
-  // console.log(userData, "UserData")
-  
-  const onSubmit = () => {
 
-    console.log("State", state);
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-right",
+    iconColor: "white",
+    customClass: {
+      popup: "colored-toast",
+    },
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    icon: "success",
+    title: "Product Created Successfully",
+  });
+
+  const onSubmit = () => {
+    // console.log("Button Pressed");
+    // const { onSubmit } = state;
+
+    const product = { ...state };
+    // console.log(product)
+    let response = 
+    FormValidation(
+      setSubmitError,
+      submitError,
+      name,
+      purchasePrice,
+      salePrice,
+      stock
+    );
+    console.log("FormValidation",response)
+    if (response) {
+      createProduct(dispatch, product);
+      navigate("/dashboard/products");
+      Toast.fire(<Toast />);
+    } else {
+     console.log("Not Done")
+    }
+
+    
+
+    // try {
+    //   dispatch({ type: 'PRODUCT_CREATE_REQUEST' });
+
+    //   const data = userData
+    //   dispatch({ type: 'PRODUCT_CREATE_SUCCESS', payload: data });
+    //   console.log("CreatePost", data)
+    // } catch (error) {}
+    // onSubmit(userData);
+
+    // e.preventDefault();
+    // const postData = () => (
+    //   state.name,
+    //   state.purchasePrice,
+    //   state.salePrice,
+    //   state.stock,
+    //   );
+    // const postData = () => {
+    //  state.name;
+    // };
+    // function postData() {
+    //   state.name
+    // }
+    // console.log("postData", postData);
+    // console.log("State", userData);
+    // console.log("e.preventDefault()", e.preventDefault());
   };
 
   return (
@@ -73,13 +172,26 @@ const AddProduct = () => {
           {formArray.map((items, index) => (
             <Grid key={index} item xs={items.xs} md={items.md}>
               <TextField
+                // onSubmit={() => {
+                //   onSubmit();
+                //   console.log("Presss");
+                // }}
                 size="small"
                 id="outlined-basic"
                 label={items.name}
                 //   variant="outlined"
                 fullWidth
                 onChange={items.onchange}
+                // error={items.error}
+                // error={"This Field is required"}
+              ></TextField>
+              <div style={{ padding: 5 }}>
+                <CustomText
+                  fontSize={11}
+                  color={colors.lightRed}
+                  title={items.error ? items.error : ""}
                 />
+              </div>
             </Grid>
           ))}
         </Grid>
@@ -91,19 +203,10 @@ const AddProduct = () => {
           color={colors.white1}
           width={60}
           height={30}
-          justifyContent={"start"}
+          justifyContent={"center"}
           alignItems={"center"}
-          alignSelf={"center"}
-          onClick={() => {
-            {
-              onSubmit();
-              console.log("ButtonState", state)
-            }
-          }}
+          onClick={() => onSubmit()}
         />
-        {/* <div onPress={() => {{console.log("firstssss")}}} >
-          Heeelo
-        </div> */}
       </div>
     </div>
   );

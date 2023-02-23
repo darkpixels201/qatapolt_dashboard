@@ -5,6 +5,8 @@ import NavbarDashboard from "../Components/DashboardComponent/NavbarDashboard";
 import Dashboard from "../Screens/Dashboard/Dashboard";
 import Order from "../Screens/Dashboard/Order";
 import AddProduct from "../Screens/Dashboard/Products/AddProduct";
+import EditModalProduct from "../Screens/Dashboard/Products/EditModalProduct";
+import EditProduct from "../Screens/Dashboard/Products/EditProduct";
 import ProductDetail from "../Screens/Dashboard/Products/ProductDetail";
 import ProductsList from "../Screens/Dashboard/Products/ProductsList";
 import Stock from "../Screens/Dashboard/Stock";
@@ -21,6 +23,8 @@ const DashboardRoutes = () => {
             <Route path="products">
               <Route index element={<ProductsList />} />
               <Route path=":id" element={<ProductDetail />} />
+              <Route path="edit/:id" element={<EditProduct />} />
+              {/* <Route path="edit/:id" element={<EditModalProduct />} /> */}
             </Route>
             <Route path="addproduct" element={<AddProduct />} />
             <Route path="order" element={<Order />} />
