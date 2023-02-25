@@ -4,14 +4,16 @@ import '../../Assets/css/style.css'
 
 const CustomSearchFilter = (props) => {
   return (
-    <div>
+
       <div
-        className="form-floating h-5 mt-1 "
+        // className="form-floating h-5 mt-1 "
         style={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           width: 300,
-          alignSelf: "center",
+          // backgroundColor:"red",
+          alignItems:"center"
+          // alignSelf: "flex-end",
             // margintop: window.innerWidth <= 775 ? "100" : "100",
         }}
       >
@@ -42,7 +44,7 @@ const CustomSearchFilter = (props) => {
         />
         {/* <label>Search</label> */}
       </div>
-    </div>
+
   );
 };
 

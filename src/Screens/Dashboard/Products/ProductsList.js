@@ -30,6 +30,7 @@ import Swal from "sweetalert2";
 import { BsTrash } from "react-icons/bs";
 import { TiEdit } from "react-icons/ti";
 import { FaEye } from "react-icons/fa";
+import { icons } from "../../../Assets/Icons";
 // import "../../../Assets/css/toast.css";
 // import MuiTableCell from "@material-ui/core/TableCell";
 // import { withStyles } from "@mui/material";
@@ -93,7 +94,13 @@ const ProductsList = () => {
 
   useEffect(() => {
     // listProduct(dispatch);
-  }, [productList]);
+  }, [productList, products]);
+
+  let length = products.length;
+
+  {
+    console.log("productList.lenght", length);
+  }
 
   const deleteHandler = (id) => {
     // console.log(id)
@@ -125,27 +132,6 @@ const ProductsList = () => {
         // backgroundColor: colors.lightgray,
       }}
     >
-      {/* <TableCells>Nooooo</TableCells> */}
-      {/* <div
-        style={{
-          backgroundColor: "#fff",
-          // marginBottom: -10,
-          border: "solid",
-          borderWidth: 0.4,
-          borderBottomLeftRadius: 0,
-          borderBottomRightRadius: 0,
-          borderTopLeftRadius: 5,
-          borderTopRightRadius: 5,
-          borderBottom: 0,
-          color: colors.lightgray,
-          boxShadow: "10",
-          // boxShadow: '5px 0 10px 2px'
-          boxShadow: "1px 2px 9px #F4AAB9",
-          // borderRadius: 5,
-        }}
-      >
-        <CustomButtonHeader />
-      </div> */}
       <TableContainer
         sx={{
           // border: "solid",
@@ -163,6 +149,7 @@ const ProductsList = () => {
         style={{}}
       >
         <CustomButtonHeader />
+
         <Table aria-label="simple table">
           {/* <TableHead style={{backgroundColor:colors.grey}} >
         <TableRow style={{width:"100%"}} >
@@ -177,6 +164,8 @@ const ProductsList = () => {
             <TableCell><CustomSearchFilter /></TableCell>
           </TableRow>
         </TableHead> */}
+        {length > 0 ? (
+          <>
           <TableHead
             sx={{
               // lineHeight:5,
@@ -196,85 +185,88 @@ const ProductsList = () => {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {products ? (
+
+
+          
+            <TableBody>
               <>
                 {products.map((item, index) => (
-                  <TableRow key={index} hover>
-                    <TableCell
-                      sx={{ borderBottom: "none" }}
-                      component="th"
-                      scope="row"
-                    >
-                      {item.id}
-                    </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="center">
-                      {"item.image"}
-                    </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="center">
-                      {item.name}
-                    </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="center">
-                      {item.purchasePrice}
-                    </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="center">
-                      {item.salePrice}
-                    </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="center">
-                      {item.stock}
-                    </TableCell>
-                    <TableCell sx={{ borderBottom: "none" }} align="center">
-                      {"Status"}
-                    </TableCell>
-                    <TableCell
-                      sx={{ borderBottom: "none", cursor: "pointer" }}
-                      align="center"
-                      onClick={() => {
-                        deleteHandler(item.id);
-                        // Swal.fire({
-                        //   icon: 'error',
-                        //   title: 'Oops...',
-                        //   text: 'Something went wrong!',
-                        //   footer: '<a href="">Why do I have this issue?</a>',
-                        //   showCancelButton:true,
-                        //   cancelButtonText:"Cancel",
-                        //   confirmButtonText:"Yes",
-                        // })
-                      }}
-                    >
-                      <BsTrash size={19} color="red" />
-                    </TableCell>
-
-                    <TableCell
-                      sx={{ borderBottom: "none" }}
-                      align="center"
-                      // onClick={() => setOpen(!open)}
-                    >
-                      <Link
-                        to={`edit/${item.id}`}
-                        style={{
-                          textDecoration: "none",
-                          alignSelf: "center",
-                          // padding:20,
-                          paddingTop: 12,
-                          paddingBottom: 12,
-                          padding: 5,
-                          color: colors.black,
-                          // backgroundColor: "red",
+                  <>
+                    {console.log("item.lenght", length)}
+                    <TableRow key={index} hover>
+                      <TableCell
+                        sx={{ borderBottom: "none" }}
+                        component="th"
+                        scope="row"
+                      >
+                        {item.id}
+                      </TableCell>
+                      <TableCell sx={{ borderBottom: "none" }} align="center">
+                        {"item.image"}
+                      </TableCell>
+                      <TableCell sx={{ borderBottom: "none" }} align="center">
+                        {item.name}
+                      </TableCell>
+                      <TableCell sx={{ borderBottom: "none" }} align="center">
+                        {item.purchasePrice}
+                      </TableCell>
+                      <TableCell sx={{ borderBottom: "none" }} align="center">
+                        {item.salePrice}
+                      </TableCell>
+                      <TableCell sx={{ borderBottom: "none" }} align="center">
+                        {item.stock}
+                      </TableCell>
+                      <TableCell sx={{ borderBottom: "none" }} align="center">
+                        {"Status"}
+                      </TableCell>
+                      <TableCell
+                        sx={{ borderBottom: "none", cursor: "pointer" }}
+                        align="center"
+                        onClick={() => {
+                          deleteHandler(item.id);
+                          // Swal.fire({
+                          //   icon: 'error',
+                          //   title: 'Oops...',
+                          //   text: 'Something went wrong!',
+                          //   footer: '<a href="">Why do I have this issue?</a>',
+                          //   showCancelButton:true,
+                          //   cancelButtonText:"Cancel",
+                          //   confirmButtonText:"Yes",
+                          // })
                         }}
                       >
-                        <TiEdit size={20} />
-                      </Link>
-                    </TableCell>
+                        <BsTrash size={19} color="red" />
+                      </TableCell>
 
-                    <TableCell
-                      sx={{ borderBottom: "none", height: "100%" }}
-                      align="center"
-                      onClick={() => setOpen(!open)}
-                    >
+                      <TableCell
+                        sx={{ borderBottom: "none" }}
+                        align="center"
+                        // onClick={() => setOpen(!open)}
+                      >
+                        <Link
+                          to={`edit/${item.id}`}
+                          style={{
+                            textDecoration: "none",
+                            alignSelf: "center",
+                            // padding:20,
+                            paddingTop: 12,
+                            paddingBottom: 12,
+                            padding: 5,
+                            color: colors.black,
+                            // backgroundColor: "red",
+                          }}
+                        >
+                          <TiEdit size={20} />
+                        </Link>
+                      </TableCell>
 
-                      {/* GO TO NEXT PAGE AND THEN VIEW PRODUCT */}
-                      {/* <Link
+                      <TableCell
+                        sx={{ borderBottom: "none", height: "100%" }}
+                        align="center"
+                        onClick={() => setOpen(!open)}
+                      >
+                        {/* GO TO NEXT PAGE AND THEN VIEW PRODUCT */}
+                        {/* <Link
                         to={`${item.id}`}
                         style={{
                           textDecoration: "none",
@@ -290,28 +282,38 @@ const ProductsList = () => {
                         <FaEye size={19} />
                       </Link> */}
 
-                      {/* MODAL VIEW */}
-                      <FaEye size={19} />
+                        {/* MODAL VIEW */}
+                        <FaEye size={19} />
+                      </TableCell>
 
-
-                    </TableCell>
-
-                    {/* <Modal open={open} onClose={handleClose}>
+                      {/* <Modal open={open} onClose={handleClose}>
                       <EditModalProduct />
                     </Modal> */}
 
-                    <ViewModal
-                      item={item}
-                      open={open}
-                      handleClose={handleClose}
-                    />
-                  </TableRow>
+                      <ViewModal
+                        item={item}
+                        open={open}
+                        handleClose={handleClose}
+                      />
+                    </TableRow>
+                  </>
                 ))}
               </>
-            ) : (
-              <div>Nothing to Show</div>
-            )}
-          </TableBody>
+            </TableBody>
+            </>
+          ) : (
+            <div
+              style={{
+                height: "70vh",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <img src={icons.emptyBox} style={{ height: 200, width: 200 }} />
+            </div>
+          )}
         </Table>
       </TableContainer>
       <div>

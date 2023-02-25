@@ -8,13 +8,9 @@ import {
 } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import "../../Assets/css/style.css";
-import { FaProductHunt } from "react-icons/fa";
 import { RiProductHuntLine } from "react-icons/ri";
-import { TbReport, TbStack2, TbDiscount } from "react-icons/tb";
-import { BiCategory } from "react-icons/bi";
-import { AiOutlineUser } from "react-icons/ai";
-import { IoReceiptOutline } from "react-icons/io5";
-import { BsReceiptCutoff } from "react-icons/bs";
+import { BiUser } from "react-icons/bi";
+import { BsFileEarmarkPost } from "react-icons/bs";
 import NavbarMap from "./NavbarMap";
 import { colors } from "../../utils/Colors";
 
@@ -28,24 +24,24 @@ const NavbarDashboard = () => {
         icon: <RiProductHuntLine size={23} />,
       },
       subMenu: [
-        { id:1, name: "Products", path: "/dashboard/products" },
-        { id:2,  name: "Add Products", path: "/dashboard/addproduct" },
+        { id: 1, name: "Products", path: "/dashboard/products" },
+        { id: 2, name: "Add Products", path: "/dashboard/addproduct" },
       ],
     },
     {
       id: 2,
       menuItem: {
-        name: "Order",
+        name: "Users",
         path: "/dashboard/order",
-        icon: <BsReceiptCutoff size={23} />,
+        icon: <BiUser size={23} />,
       },
     },
     {
       id: 3,
       menuItem: {
-        name: "Stock",
+        name: "Create Post",
         path: "/dashboard/stock",
-        icon: <TbStack2 size={23} />,
+        icon: <BsFileEarmarkPost size={23} />,
       },
     },
   ];
