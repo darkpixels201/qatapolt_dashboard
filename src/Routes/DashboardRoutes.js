@@ -1,23 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import HeaderDashboard from "../Components/DashboardComponent/HeaderDashboard";
 import NavbarDashboard from "../Components/DashboardComponent/NavbarDashboard";
 import Dashboard from "../Screens/Dashboard/Dashboard";
-import Order from "../Screens/Dashboard/Order";
 import AddProduct from "../Screens/Dashboard/Products/AddProduct";
 import EditModalProduct from "../Screens/Dashboard/Products/EditModalProduct";
 import EditProduct from "../Screens/Dashboard/Products/EditProduct";
 import ProductDetail from "../Screens/Dashboard/Products/ProductDetail";
 import ProductsList from "../Screens/Dashboard/Products/ProductsList";
-import Stock from "../Screens/Dashboard/Stock";
+import Stock from "../Screens/Dashboard/Post";
+import User from "../Screens/Dashboard/User";
 
 const DashboardRoutes = () => {
+  const [sideBar, setSideBar] = useState(true)
   return (
     <div>
       <div style={{ display: "flex", flexDirection: "row" }}>
-        <NavbarDashboard />
+        <NavbarDashboard sideBar={sideBar} setSideBar={setSideBar} />
         <div style={{width:"100%"}} >
-          <HeaderDashboard />
+          <HeaderDashboard sideBar={sideBar} setSideBar={setSideBar} />
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="products">
@@ -27,8 +28,8 @@ const DashboardRoutes = () => {
               {/* <Route path="edit/:id" element={<EditModalProduct />} /> */}
             </Route>
             <Route path="addproduct" element={<AddProduct />} />
-            <Route path="order" element={<Order />} />
-            <Route path="stock" element={<Stock />} />
+            <Route path="user" element={<User />} />
+            <Route path="post" element={<Stock />} />
           </Routes>
         </div>
       </div>

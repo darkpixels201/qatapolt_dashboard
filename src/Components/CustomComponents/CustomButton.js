@@ -11,6 +11,7 @@ function CustomButton(props) {
         display: props.display || "flex",
         width: props.width || "100%",
         height: props.height,
+        fontFamily: props.fontFamily,
         borderColor: props.borderColor,
         borderRadius: props.borderRadius || 8,
         borderWidth: props.borderWidth,

@@ -1,50 +1,69 @@
 import React from "react";
 import { colors } from "../../utils/Colors";
-import '../../Assets/css/style.css'
+import "../../Assets/css/style.css";
+import { AiOutlineSearch } from "react-icons/ai";
 
-const CustomSearchFilter = (props) => {
+const CustomSearchFilter = ({
+  height,
+  width,
+  padding,
+  borderRadius,
+  border,
+  borderWidth,
+  borderColor,
+  outline,
+  outerWidth,
+  icon,
+  placeholder,
+  onChange,
+  ...props
+}) => {
   return (
+    <div
+      // className="form-floating h-5 mt-1 "
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        // width: outerWidth || 300,
+        // backgroundColor:"red",
+        alignItems: "center",
+        height: height || 4,
+        // width: 500,
+        padding: padding || 20,
+        borderRadius: borderRadius || 50,
+        border: border || "solid",
+        borderWidth: borderWidth || 1,
+        borderColor: borderColor || colors.grey,
+        outline: outline || "none",
+        // backgroundColor:"red"
+        // alignSelf: "flex-end",
+        // margintop: window.innerWidth <= 775 ? "100" : "100",
+      }}
+    >
+      {icon ? <AiOutlineSearch /> : ""}
 
-      <div
-        // className="form-floating h-5 mt-1 "
+      <input
         style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          width: 300,
-          // backgroundColor:"red",
-          alignItems:"center"
-          // alignSelf: "flex-end",
-            // margintop: window.innerWidth <= 775 ? "100" : "100",
+          border: "none",
+          borderColor: "none",
+          outline: "none",
+          width: width || window.innerWidth <= 775 ? "100%" : "80%",
         }}
-      >
-        <input
-          style={{
-            height: 4,
-            width: window.innerWidth <= 775 ? "100%" : "80%",
-            // width: 500,
-            padding: 20,
-            borderRadius: 50,
-            border:"solid",
-            borderWidth:1,
-            borderColor:colors.grey,
-            outline:"none",
-          }}
-          className="inputborder"
-          type="text"
-          id="floatingInput"
-          placeholder={props.placeholder}
-          onChange={props.onChange}
-          // onChange={(txt) => {
-          //   let data = tableExample.filter((item) =>
-          //     item.user.name.includes(txt) ? item : ""
-          //   );
-          //   setFilterList(data);
-          //   console.log("Fltered Data",data);
-          // }}
-        />
-        {/* <label>Search</label> */}
-      </div>
-
+        // className="inputborder"
+        type="text"
+        id="floatingInput"
+        placeholder={placeholder}
+        onChange={onChange}
+        // onChange={(txt) => {
+        //   let data = tableExample.filter((item) =>
+        //     item.user.name.includes(txt) ? item : ""
+        //   );
+        //   setFilterList(data);
+        //   console.log("Fltered Data",data);
+        // }}
+      />
+      {/* <label>Search</label> */}
+    </div>
   );
 };
 

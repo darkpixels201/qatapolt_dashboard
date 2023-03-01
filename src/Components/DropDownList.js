@@ -3,8 +3,9 @@ import CustomText from "./CustomComponents/CustomText";
 import Spacer from "./CustomComponents/Spacer";
 import "../Assets/css/DropDown.css";
 import { colors } from "../utils/Colors";
+import { icons } from "../Assets/Icons";
 
-const DropDownList = ({ SearchArray, Icon }) => {
+const DropDownList = ({ SearchArray, Icon, Img }) => {
   const [open, setOpen] = useState(false);
 
   let menuRef = useRef();
@@ -26,13 +27,34 @@ const DropDownList = ({ SearchArray, Icon }) => {
 
   return (
     <div className="App" ref={menuRef}>
-      <Icon
-        size={28}
-        onClick={() => {
-          setOpen(!open);
-        }}
-        style={{ cursor: "pointer", paddingTop: 6 }}
-      />
+      {Icon ? (
+        <Icon
+          size={28}
+          onClick={() => {
+            setOpen(!open);
+          }}
+          style={{ cursor: "pointer", paddingTop: 6 }}
+        />
+      ) : (
+        ""
+      )}
+
+      {Img ? (
+        <div style={{ paddingTop: 10 }}>
+          <img
+            onClick={() => {
+              setOpen(!open);
+            }}
+            src={Img}
+            style={{
+              height: 25,
+              width: 25,
+            }}
+          />
+        </div>
+      ) : (
+        ""
+      )}
 
       <Spacer height={5} />
 

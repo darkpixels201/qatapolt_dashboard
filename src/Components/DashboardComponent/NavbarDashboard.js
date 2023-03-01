@@ -5,6 +5,7 @@ import {
   MenuItem,
   SubMenu,
   useProSidebar,
+  collapseSidebar,
 } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import "../../Assets/css/style.css";
@@ -13,35 +14,49 @@ import { BiUser } from "react-icons/bi";
 import { BsFileEarmarkPost } from "react-icons/bs";
 import NavbarMap from "./NavbarMap";
 import { colors } from "../../utils/Colors";
+import { icons } from "../../Assets/Icons";
+import { images } from "../../Assets/Images";
+import CustomText from "../CustomComponents/CustomText";
+import Spacer from "../CustomComponents/Spacer";
+import { BsShieldShaded } from "react-icons/bs";
+import { UseWindowSize } from "../UseWindowSize";
 
-const NavbarDashboard = () => {
+const NavbarDashboard = ({ sideBar, setSideBar }) => {
   const menu = [
     {
       id: 1,
       menuItem: {
-        name: "Products",
-        path: "",
-        icon: <RiProductHuntLine size={23} />,
+        name: "Dashboard",
+        path: "/dashboard",
+        icon: <BsShieldShaded size={17} />,
       },
-      subMenu: [
-        { id: 1, name: "Products", path: "/dashboard/products" },
-        { id: 2, name: "Add Products", path: "/dashboard/addproduct" },
-      ],
     },
+    // {
+    //   id: 2,
+    //   menuItem: {
+    //     name: "Products",
+    //     path: "",
+    //     icon: <RiProductHuntLine size={17} />,
+    //   },
+    //   subMenu: [
+    //     { id: 1, name: "Products", path: "/dashboard/products" },
+    //     { id: 2, name: "Add Products", path: "/dashboard/addproduct" },
+    //   ],
+    // },
     {
       id: 2,
       menuItem: {
         name: "Users",
-        path: "/dashboard/order",
-        icon: <BiUser size={23} />,
+        path: "/dashboard/user",
+        icon: <BiUser size={17} />,
       },
     },
     {
       id: 3,
       menuItem: {
         name: "Create Post",
-        path: "/dashboard/stock",
-        icon: <BsFileEarmarkPost size={23} />,
+        path: "/dashboard/post",
+        icon: <BsFileEarmarkPost size={17} />,
       },
     },
   ];
@@ -66,62 +81,112 @@ const NavbarDashboard = () => {
     cursor: "pointer",
     // backgroundColor: isHover ? "lightblue" : "rgb(0, 191, 255)",
     // color: isHover ? "red" : "purple",
+    padding: sideBar ? 15 : 0,
   };
-  const { toggleSidebar } = useProSidebar();
+
+  // const [width] = UseWindowSize();
+  // console.log("width>>>>>>",width)
 
   return (
     <div>
       <Sidebar
-        style={{ height: "100%", minHeight: "100vh" }}
-        backgroundColor={colors.lightBlack}
+        style={{ height: "100%", minHeight: "100vh", borderRightWidth: 0 }}
+        backgroundColor={colors.grey1}
         // rootStyles={{
         //   background:
         //     "linear-gradient(180deg, rgba(166,240,255,1) 0%, rgba(220,250,255,1) 49%, rgba(230,252,255,1) 100%)",
         // }}
-        breakPoint={window.innerWidth <= 450 ? "always" : null}
+        breakPoint={window.innerWidth <= 990 ? "always" : null}
         defaultCollapsed={SubMenu ? false : true}
+        // collapsedWidth="80px"
       >
-        <Menu
-          style={boxStyle}
-          // onMouseEnter={handleMouseEnter}
-          // onMouseLeave={handleMouseLeave}
-        >
-          {menu.map((item, index) => (
-            <NavbarMap
-              key={index}
-              item={item}
-              // isHover={isHover}
-              // handleMouseEnter={handleMouseEnter}
-              // handleMouseLeave={handleMouseLeave}
+        <>
+          <div
+            style={{
+              width: "100%",
+              height: 66,
+              backgroundColor: colors.white,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "center",
+            }}
+          >
+            <img
+              src={icons.logo}
+              style={{
+                height: sideBar ? 50 : 35,
+                width: sideBar ? 85 : 55,
+                position: "absolute",
+              }}
             />
-          ))}
-        </Menu>
-      </Sidebar>
-      {/* <Sidebar
-        rootStyles={{
-          background: "red",
-        }}
-      >
-        <Menu>
-          {menu.map((item, index) => (
-            <div key={index}>
-              {item.subMenu ? (
-                <SubMenu label={item.menuItem.name}>
-                  {item.subMenu?.map((s, i) => (
-                    <MenuItem routerLink={<Link to={s.path} />} key={i}>
-                      {s.name}
-                    </MenuItem>
-                  ))}
-                </SubMenu>
+            <img
+              src={images.bluebg}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
+
+          <div
+            style={{
+              width: "100%",
+              height: 70,
+              // backgroundColor: colors.white,
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              alignSelf: "center",
+              background:
+                "linear-gradient(90deg, rgba(159, 112, 60, 1) 0%, rgba(193, 146, 90, 1) 49%, rgba(227, 183, 122, 1) 100%)",
+            }}
+          >
+            <Spacer width={sideBar ? 30 : 20} />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
+            >
+              <img src={icons.profile1} style={{ height: 40, width: 40 }} />
+              <Spacer width={10} />
+              {sideBar ? (
+                <div>
+                  <CustomText
+                    title="Ish"
+                    color={colors.white}
+                    fontFamily={"bold"}
+                    fontSize={15}
+                  />
+                  <CustomText
+                    title="Owner"
+                    color={colors.white}
+                    fontFamily={"light"}
+                    fontSize={15}
+                  />
+                </div>
               ) : (
-                <MenuItem routerLink={<Link to={item.menuItem.path} />}>
-                  {item.menuItem.name}
-                </MenuItem>
+                ""
               )}
             </div>
-          ))}
-        </Menu>
-      </Sidebar> */}
+          </div>
+          <Menu
+            style={boxStyle}
+            // onMouseEnter={handleMouseEnter}
+            // onMouseLeave={handleMouseLeave}
+          >
+            {menu.map((item, index) => (
+              <NavbarMap
+                key={index}
+                item={item}
+                // isHover={isHover}
+                // handleMouseEnter={handleMouseEnter}
+                // handleMouseLeave={handleMouseLeave}
+              />
+            ))}
+          </Menu>
+        </>
+      </Sidebar>
     </div>
   );
 };

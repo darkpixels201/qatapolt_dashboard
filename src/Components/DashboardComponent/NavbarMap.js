@@ -30,27 +30,25 @@ const NavbarMap = ({ item }) => {
     subSetIsHover();
   };
   const boxStyle = {
-    // height: "200px",
-    // width: "200px",
-    // display: "flex",
-    // justifyContent: "center",
-    // alignItems: "center",
-    // fontSize: "30px",
     cursor: "pointer",
-    // backgroundColor: isHover ? "lightblue" : "rgb(0, 191, 255)",
-    // color: isHover ? "red" : "purple",
-    color: colors.lightWhite,
-    backgroundColor: isHover ? colors.lightGrey : colors.lightBlack,
-    // opacity: 0.9,
-    opacity:isHover ? 0.9 : 1,
+    color: isHover ? colors.purple : colors.lightBlack3,
+    backgroundColor: isHover ? colors.white : colors.grey1,
+    opacity: isHover ? 0.9 : 1,
+    fontSize: 14,
+    borderRadius: 5,
+    height: 40,
+    transition: "background-color 0.5s",
+
+    // padding:20,
   };
 
   const subMenuBoxStyle = {
     cursor: "pointer",
     // backgroundColor: isHover ? "lightblue" : "rgb(0, 191, 255)",
     // color: isHover ? "red" : "purple",
-    color: colors.lightWhite,
-    backgroundColor: colors.lightBlack,
+    fontSize: 14,
+    color: colors.lightBlack3,
+    backgroundColor: colors.grey1,
     opacity: 0.9,
   };
   const { toggleSidebar } = useProSidebar();
@@ -82,7 +80,7 @@ const NavbarMap = ({ item }) => {
               onMouseLeave={subhandleMouseLeave}
               style={subMenuBoxStyle}
               onClick={() => {
-                window.innerWidth <= 450 ? toggleSidebar() : console.log("Yes");
+                window.innerWidth <= 990 ? toggleSidebar() : console.log("Yes");
               }}
               routerLink={<Link to={s.path} />}
               key={i}
@@ -98,7 +96,7 @@ const NavbarMap = ({ item }) => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           onClick={() => {
-            window.innerWidth <= 450 ? toggleSidebar() : console.log("Yes");
+            window.innerWidth <= 990 ? toggleSidebar() : console.log("Yes");
           }}
           routerLink={<Link to={item.menuItem.path} />}
           icon={item.menuItem.icon}
