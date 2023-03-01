@@ -534,7 +534,7 @@ const DashboardTable = () => {
           </Box>
         </Grid>
       </Grid>
-      <Spacer height={400} />
+      <Spacer height={100} />
     </Box>
   );
 };
