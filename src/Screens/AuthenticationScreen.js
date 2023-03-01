@@ -19,7 +19,7 @@ const AuthenticationScreen = () => {
           padding: 20,
         }}
       >
-        <CustomText title="Qata Polt Logo" />
+        {/* <CustomText title="Qata Polt Logo" /> */}
         <div
           style={{
             display: "flex",

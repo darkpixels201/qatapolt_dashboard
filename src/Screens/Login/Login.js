@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import { SlLock } from "react-icons/sl";
 import { Link } from "react-router-dom";
+import { icons } from "../../Assets/Icons";
 import CustomText from "../../Components/CustomComponents/CustomText";
 import Spacer from "../../Components/CustomComponents/Spacer";
 import FormComponent from "../../Components/FormComponent";
@@ -17,7 +18,7 @@ const Login = () => {
         style={{
           display: "flex",
           justifyContent: "center",
-          height: "60vh",
+          height: "100vh",
           padding: 20,
         }}
       >
@@ -25,7 +26,7 @@ const Login = () => {
           style={{
             display: "flex",
             justifyContent: "center",
-            height: 360,
+            height: 410,
             width: 450,
             boxShadow: "2px 1px 15px -1px rgba(0,0,0,0.10)",
             backgroundColor: colors.white,
@@ -36,12 +37,15 @@ const Login = () => {
             style={{ display: "flex", flexDirection: "column", width: "100%" }}
           >
             <Spacer height={30} />
-            <CustomText
-              title="Welcome back!"
+            <div style={{display:"flex", justifyContent:"center", alignItems:"center"}} >
+            <img src={icons.qataPoltLogo} style={{height:80, width:120, }} />
+            </div>
+            {/* <CustomText
+              title="Hello! let's get started"
               fontFamily={"bold"}
               textAlign="center"
               fontSize={30}
-            />
+            /> */}
 
             <FormComponent
               placeholder={"Enter Your Email"}
@@ -75,7 +79,7 @@ const Login = () => {
                   alignSelf: "center",
                   height: 50,
                   borderRadius: 10,
-                  backgroundColor: colors.purple2,
+                  backgroundColor: colors.purple,
                   boxShadow: "2px 1px 15px -1px rgba(0,0,0,0.40)",
                   cursor: "pointer",
                 }}

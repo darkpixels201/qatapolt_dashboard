@@ -20,6 +20,7 @@ import CustomText from "../CustomComponents/CustomText";
 import Spacer from "../CustomComponents/Spacer";
 import { BsShieldShaded } from "react-icons/bs";
 import { UseWindowSize } from "../UseWindowSize";
+import { FaTrophy } from "react-icons/fa";
 
 const NavbarDashboard = ({ sideBar, setSideBar }) => {
   const menu = [
@@ -59,6 +60,14 @@ const NavbarDashboard = ({ sideBar, setSideBar }) => {
         icon: <BsFileEarmarkPost size={17} />,
       },
     },
+    {
+      id: 3,
+      menuItem: {
+        name: "Trophies",
+        path: "/dashboard/trophy",
+        icon: <FaTrophy size={16} />,
+      },
+    },
   ];
 
   const [isHover, setIsHover] = useState(false);
@@ -72,15 +81,7 @@ const NavbarDashboard = ({ sideBar, setSideBar }) => {
   };
 
   const boxStyle = {
-    // height: "200px",
-    // width: "200px",
-    // display: "flex",
-    // justifyContent: "center",
-    // alignItems: "center",
-    // fontSize: "30px",
     cursor: "pointer",
-    // backgroundColor: isHover ? "lightblue" : "rgb(0, 191, 255)",
-    // color: isHover ? "red" : "purple",
     padding: sideBar ? 15 : 0,
   };
 
@@ -92,13 +93,8 @@ const NavbarDashboard = ({ sideBar, setSideBar }) => {
       <Sidebar
         style={{ height: "100%", minHeight: "100vh", borderRightWidth: 0 }}
         backgroundColor={colors.grey1}
-        // rootStyles={{
-        //   background:
-        //     "linear-gradient(180deg, rgba(166,240,255,1) 0%, rgba(220,250,255,1) 49%, rgba(230,252,255,1) 100%)",
-        // }}
         breakPoint={window.innerWidth <= 990 ? "always" : null}
         defaultCollapsed={SubMenu ? false : true}
-        // collapsedWidth="80px"
       >
         <>
           <div
@@ -170,19 +166,9 @@ const NavbarDashboard = ({ sideBar, setSideBar }) => {
               )}
             </div>
           </div>
-          <Menu
-            style={boxStyle}
-            // onMouseEnter={handleMouseEnter}
-            // onMouseLeave={handleMouseLeave}
-          >
+          <Menu style={boxStyle}>
             {menu.map((item, index) => (
-              <NavbarMap
-                key={index}
-                item={item}
-                // isHover={isHover}
-                // handleMouseEnter={handleMouseEnter}
-                // handleMouseLeave={handleMouseLeave}
-              />
+              <NavbarMap key={index} item={item} />
             ))}
           </Menu>
         </>
