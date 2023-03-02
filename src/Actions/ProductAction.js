@@ -10,7 +10,11 @@ import {
   REMOVE_PRODUCT,
   UPDATE_PRODUCT,
   EDIT_PRODUCT,
+  PRODUCT_LIST,
 } from "../Constant/ProductConstant";
+import { db } from "../firebase-config";
+import {collection, getDocs} from 'firebase/firestore'
+import { useState } from "react";
 
 // export const listProduct = (dispatch) => {
 //   try {
@@ -32,6 +36,14 @@ import {
 //     });
 //   }
 // };
+// const userCollectionRef = collection(db, "users")
+
+// const [user, setUser] = useState()
+// export const listProduct = async (dispatch, user) => {
+
+//   dispatch({type:PRODUCT_LIST, payload: user })
+//   console.log("...user",user)
+// }
 
 export const createProduct = (dispatch, product) => {
   try {

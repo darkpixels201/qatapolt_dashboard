@@ -18,6 +18,7 @@ import "../../../Assets/css/font.css";
 import { useDispatch, useSelector } from "react-redux";
 import { listProduct, removeProduct } from "../../../Actions/ProductAction";
 import {
+  PRODUCT_LIST,
   PRODUCT_LIST_FAIL,
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
@@ -31,6 +32,8 @@ import { BsTrash } from "react-icons/bs";
 import { TiEdit } from "react-icons/ti";
 import { FaEye } from "react-icons/fa";
 import { icons } from "../../../Assets/Icons";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../firebase-config";
 // import "../../../Assets/css/toast.css";
 // import MuiTableCell from "@material-ui/core/TableCell";
 // import { withStyles } from "@mui/material";
@@ -66,6 +69,7 @@ const ProductsList = () => {
   // const { products } = useSelector((state) => state.productCreateReducer)
   const productList = useSelector((state) => state.productReducer);
   const { products, deleteProducts } = productList;
+  console.log("+++ From ProductList", products);
   const classes = useStyles();
 
   const Toast = Swal.mixin({
@@ -96,10 +100,10 @@ const ProductsList = () => {
     // listProduct(dispatch);
   }, [productList, products]);
 
-  let length = products.length;
+  // let length = products.length;
 
   {
-    console.log("productList.lenght", length);
+    // console.log("productList.lenght", length);
   }
 
   const deleteHandler = (id) => {
@@ -123,6 +127,41 @@ const ProductsList = () => {
   //   // sendEmail();
   // }, [dispatch]);
 
+  const [user, setUser] = useState();
+  const userCollectionRef = collection(db, "users");
+
+  console.log("ProductListUser", user);
+  // const userCollectionRef = collection(db, "users")
+
+  // useEffect(() => {
+
+  //   const getUsers = async () => {
+  //    const data = await getDocs(userCollectionRef)
+  //    setUser(data.docs.map((doc) => ({...doc.data()})))
+  //   //  console.log("Data",user.name)
+  //   }
+  //   getUsers()
+  // },[])
+
+  useEffect(() => {
+    const getUsers = async () => {
+      const data = await getDocs(userCollectionRef);
+      setUser(data.docs.map((doc) => ({ ...doc.data() })));
+      dispatch({type:PRODUCT_LIST, payload: user })
+      console.log("...user",user)
+      //  console.log("Data",user.name)
+    };
+    getUsers();
+  },[]);
+
+  // useEffect(() => {
+  //   listProduct(dispatch, user);
+  //   // console.log("user",user)
+  // }, []);
+
+  // const response = listProduct(dispatch,user, setUser )
+  // console.log("listProduct Response",response)
+
   return (
     <div
       style={{
@@ -132,6 +171,17 @@ const ProductsList = () => {
         // backgroundColor: colors.lightgray,
       }}
     >
+      {user?.map((item, index) => {
+        return (
+          <div>
+            {item.name}
+            {item.email}
+            {item.skill1}
+            {item.skill2}
+            {item.skill3}
+          </div>
+        );
+      })}
       <TableContainer
         sx={{
           // border: "solid",
@@ -164,144 +214,33 @@ const ProductsList = () => {
             <TableCell><CustomSearchFilter /></TableCell>
           </TableRow>
         </TableHead> */}
-        {length > 0 ? (
-          <>
-          <TableHead
-            sx={{
-              // lineHeight:5,
-              background: "linear-gradient(to right,#9cbefe, #f4f4f4)",
-              boxShadow: "0.5px 0.5px 10px #6b9efd",
-            }}
-          >
-            <TableRow sx={{ height: 5 }}>
-              {ProductTableCell.map((item, index) => (
-                <TableCell
-                  key={index}
-                  sx={{ borderBottom: "none", fontFamily: "bold" }}
-                  align="center"
-                >
-                  {item.name}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
+          {/* {length > 0 ? ( */}
+            <>
+              <TableHead
+                sx={{
+                  // lineHeight:5,
+                  background: "linear-gradient(to right,#9cbefe, #f4f4f4)",
+                  boxShadow: "0.5px 0.5px 10px #6b9efd",
+                }}
+              >
+                <TableRow sx={{ height: 5 }}>
+                  {ProductTableCell.map((item, index) => (
+                    <TableCell
+                      key={index}
+                      sx={{ borderBottom: "none", fontFamily: "bold" }}
+                      align="center"
+                    >
+                      {item.name}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
 
-
-          
-            <TableBody>
-              <>
-                {products.map((item, index) => (
-                  <>
-                    {console.log("item.lenght", length)}
-                    <TableRow key={index} hover>
-                      <TableCell
-                        sx={{ borderBottom: "none" }}
-                        component="th"
-                        scope="row"
-                      >
-                        {item.id}
-                      </TableCell>
-                      <TableCell sx={{ borderBottom: "none" }} align="center">
-                        {"item.image"}
-                      </TableCell>
-                      <TableCell sx={{ borderBottom: "none" }} align="center">
-                        {item.name}
-                      </TableCell>
-                      <TableCell sx={{ borderBottom: "none" }} align="center">
-                        {item.purchasePrice}
-                      </TableCell>
-                      <TableCell sx={{ borderBottom: "none" }} align="center">
-                        {item.salePrice}
-                      </TableCell>
-                      <TableCell sx={{ borderBottom: "none" }} align="center">
-                        {item.stock}
-                      </TableCell>
-                      <TableCell sx={{ borderBottom: "none" }} align="center">
-                        {"Status"}
-                      </TableCell>
-                      <TableCell
-                        sx={{ borderBottom: "none", cursor: "pointer" }}
-                        align="center"
-                        onClick={() => {
-                          deleteHandler(item.id);
-                          // Swal.fire({
-                          //   icon: 'error',
-                          //   title: 'Oops...',
-                          //   text: 'Something went wrong!',
-                          //   footer: '<a href="">Why do I have this issue?</a>',
-                          //   showCancelButton:true,
-                          //   cancelButtonText:"Cancel",
-                          //   confirmButtonText:"Yes",
-                          // })
-                        }}
-                      >
-                        <BsTrash size={19} color="red" />
-                      </TableCell>
-
-                      <TableCell
-                        sx={{ borderBottom: "none" }}
-                        align="center"
-                        // onClick={() => setOpen(!open)}
-                      >
-                        <Link
-                          to={`edit/${item.id}`}
-                          style={{
-                            textDecoration: "none",
-                            alignSelf: "center",
-                            // padding:20,
-                            paddingTop: 12,
-                            paddingBottom: 12,
-                            padding: 5,
-                            color: colors.black,
-                            // backgroundColor: "red",
-                          }}
-                        >
-                          <TiEdit size={20} />
-                        </Link>
-                      </TableCell>
-
-                      <TableCell
-                        sx={{ borderBottom: "none", height: "100%" }}
-                        align="center"
-                        onClick={() => setOpen(!open)}
-                      >
-                        {/* GO TO NEXT PAGE AND THEN VIEW PRODUCT */}
-                        {/* <Link
-                        to={`${item.id}`}
-                        style={{
-                          textDecoration: "none",
-                          alignSelf: "center",
-                          // padding:20,
-                          paddingTop: 12,
-                          paddingBottom: 12,
-                          padding: 2,
-                          color: colors.black,
-                          // backgroundColor: "red",
-                        }}
-                      >
-                        <FaEye size={19} />
-                      </Link> */}
-
-                        {/* MODAL VIEW */}
-                        <FaEye size={19} />
-                      </TableCell>
-
-                      {/* <Modal open={open} onClose={handleClose}>
-                      <EditModalProduct />
-                    </Modal> */}
-
-                      <ViewModal
-                        item={item}
-                        open={open}
-                        handleClose={handleClose}
-                      />
-                    </TableRow>
-                  </>
-                ))}
-              </>
-            </TableBody>
+              <TableBody>
+                <>{/* Product Map */}</>
+              </TableBody>
             </>
-          ) : (
+          {/* ) : ( */}
             <div
               style={{
                 height: "70vh",
@@ -313,7 +252,7 @@ const ProductsList = () => {
             >
               <img src={icons.emptyBox} style={{ height: 200, width: 200 }} />
             </div>
-          )}
+          {/* )} */}
         </Table>
       </TableContainer>
       <div>
@@ -358,4 +297,113 @@ const ViewModal = ({ item, open, handleClose }) => (
 //     {item.name}
 //     </Link>
 //   </div>
+// ))}
+
+// {products.map((item, index) => (
+//   <>
+//     {console.log("item.lenght", length)}
+//     <TableRow key={index} hover>
+//       <TableCell
+//         sx={{ borderBottom: "none" }}
+//         component="th"
+//         scope="row"
+//       >
+//         {item.id}
+//       </TableCell>
+//       <TableCell sx={{ borderBottom: "none" }} align="center">
+//         {"item.image"}
+//       </TableCell>
+//       <TableCell sx={{ borderBottom: "none" }} align="center">
+//         {item.name}
+//       </TableCell>
+//       <TableCell sx={{ borderBottom: "none" }} align="center">
+//         {item.purchasePrice}
+//       </TableCell>
+//       <TableCell sx={{ borderBottom: "none" }} align="center">
+//         {item.salePrice}
+//       </TableCell>
+//       <TableCell sx={{ borderBottom: "none" }} align="center">
+//         {item.stock}
+//       </TableCell>
+//       <TableCell sx={{ borderBottom: "none" }} align="center">
+//         {"Status"}
+//       </TableCell>
+//       <TableCell
+//         sx={{ borderBottom: "none", cursor: "pointer" }}
+//         align="center"
+//         onClick={() => {
+//           deleteHandler(item.id);
+//           // Swal.fire({
+//           //   icon: 'error',
+//           //   title: 'Oops...',
+//           //   text: 'Something went wrong!',
+//           //   footer: '<a href="">Why do I have this issue?</a>',
+//           //   showCancelButton:true,
+//           //   cancelButtonText:"Cancel",
+//           //   confirmButtonText:"Yes",
+//           // })
+//         }}
+//       >
+//         <BsTrash size={19} color="red" />
+//       </TableCell>
+
+//       <TableCell
+//         sx={{ borderBottom: "none" }}
+//         align="center"
+//         // onClick={() => setOpen(!open)}
+//       >
+//         <Link
+//           to={`edit/${item.id}`}
+//           style={{
+//             textDecoration: "none",
+//             alignSelf: "center",
+//             // padding:20,
+//             paddingTop: 12,
+//             paddingBottom: 12,
+//             padding: 5,
+//             color: colors.black,
+//             // backgroundColor: "red",
+//           }}
+//         >
+//           <TiEdit size={20} />
+//         </Link>
+//       </TableCell>
+
+//       <TableCell
+//         sx={{ borderBottom: "none", height: "100%" }}
+//         align="center"
+//         onClick={() => setOpen(!open)}
+//       >
+//         {/* GO TO NEXT PAGE AND THEN VIEW PRODUCT */}
+//         {/* <Link
+//         to={`${item.id}`}
+//         style={{
+//           textDecoration: "none",
+//           alignSelf: "center",
+//           // padding:20,
+//           paddingTop: 12,
+//           paddingBottom: 12,
+//           padding: 2,
+//           color: colors.black,
+//           // backgroundColor: "red",
+//         }}
+//       >
+//         <FaEye size={19} />
+//       </Link> */}
+
+//         {/* MODAL VIEW */}
+//         <FaEye size={19} />
+//       </TableCell>
+
+//       {/* <Modal open={open} onClose={handleClose}>
+//       <EditModalProduct />
+//     </Modal> */}
+
+//       <ViewModal
+//         item={item}
+//         open={open}
+//         handleClose={handleClose}
+//       />
+//     </TableRow>
+//   </>
 // ))}

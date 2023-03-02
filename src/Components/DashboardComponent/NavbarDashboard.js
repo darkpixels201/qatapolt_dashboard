@@ -32,18 +32,18 @@ const NavbarDashboard = ({ sideBar, setSideBar }) => {
         icon: <BsShieldShaded size={17} />,
       },
     },
-    // {
-    //   id: 2,
-    //   menuItem: {
-    //     name: "Products",
-    //     path: "",
-    //     icon: <RiProductHuntLine size={17} />,
-    //   },
-    //   subMenu: [
-    //     { id: 1, name: "Products", path: "/dashboard/products" },
-    //     { id: 2, name: "Add Products", path: "/dashboard/addproduct" },
-    //   ],
-    // },
+    {
+      id: 2,
+      menuItem: {
+        name: "Products",
+        path: "",
+        icon: <RiProductHuntLine size={17} />,
+      },
+      subMenu: [
+        { id: 1, name: "Products", path: "/dashboard/products" },
+        { id: 2, name: "Add Products", path: "/dashboard/addproduct" },
+      ],
+    },
     {
       id: 2,
       menuItem: {

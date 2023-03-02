@@ -9,6 +9,7 @@ import {
   CREATE_PRODUCT,
   EDIT_PRODUCT,
   REMOVE_PRODUCT,
+  PRODUCT_LIST,
 } from "../Constant/ProductConstant";
 
 // Add, Edit, Remove, Show
@@ -57,14 +58,19 @@ export const productReducer = (state = { products: [] }, action) => {
       // return { products: console.log("=>>>>>>>Delete Product") };
     }
 
-    case PRODUCT_LIST_REQUEST:
-      return { loading: true, products: [] };
+    case PRODUCT_LIST: {
+      console.log("Products Action.payload",action.payload)
+      return { products: action.payload,  }
+    }
 
-    case PRODUCT_LIST_SUCCESS:
-      return { products: action.payload };
+    // case PRODUCT_LIST_REQUEST:
+    //   return { loading: true, products: [] };
 
-    case PRODUCT_LIST_FAIL:
-      return { loading: false, error: action.payload };
+    // case PRODUCT_LIST_SUCCESS:
+    //   return { products: action.payload };
+
+    // case PRODUCT_LIST_FAIL:
+    //   return { loading: false, error: action.payload };
 
     default:
       return state;
