@@ -7,19 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
-import { Grid, Icon, PaginationItem, Tab } from "@mui/material";
 import { Box, padding, width } from "@mui/system";
 import { FaCross, FaTrash } from "react-icons/fa";
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-import { RiDeleteBack2Fill } from "react-icons/ri";
+
 import CustomText from "../../Components/CustomComponents/CustomText";
 import { colors } from "../../utils/Colors";
 import Spacer from "../../Components/CustomComponents/Spacer";
@@ -27,178 +17,16 @@ import { RxCross1, RxCross2 } from "react-icons/rx";
 import { BsEye } from "react-icons/bs";
 import { AiFillEye } from "react-icons/ai";
 import UserModal from "../../Components/Modal/UserModal";
+import { header, userData } from "../../utils/DataArray";
 
-const columns = [
-  { id: "name", label: "Name", minWidth: 150 },
-  //   { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
-  {
-    id: "email",
-    label: "Email",
-    minWidth: 170,
-    // align: "right",
-    // format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "accounttype",
-    label: "Account Type",
-    minWidth: 120,
-    // align: "left",
-    // format: (value) => value.toLocaleString("en-US"),
-  },
-  {
-    id: "sports",
-    label: "Sports",
-    minWidth: 100,
-    // align: "right",
-    // format: (value) => value.toFixed(2),
-  },
-  {
-    id: "skill1",
-    label: "Skill 1",
-    minWidth: 100,
-    // align: "right",
-    // format: (value) => value.toFixed(2),
-  },
-  {
-    id: "skill2",
-    label: "Skill 2",
-    minWidth: 100,
-    // align: "right",
-    // format: (value) => value.toFixed(2),
-  },
-  {
-    id: "skill3",
-    label: "Skill 3",
-    minWidth: 80,
-    // align: "right",
-    // format: (value) => value.toFixed(2),
-  },
-  {
-    id: "action",
-    label: "Action",
-    minWidth: 85,
-    align: "center",
-    // format: (value) => value.toFixed(2),
-  },
-];
+
 
 function createData(name, code, population, size) {
   const density = population / size;
   return { name, code, population, size, density };
 }
 
-const rows = [
-  {
-    id: 1,
-    name: "Ish",
-    email: "ish@gmail.com",
-    accounttype: "Athlete",
-    sport: "Football",
-    skill1: "Ball Control",
-    skill2: "Dribble",
-    skill3: "LeaderShip",
-  },
-  {
-    id: 1,
-    name: "Ahmad",
-    email: "ahmd@gmail.com",
-    accounttype: "Athlete",
-    sport: "BaseBall",
-    skill1: "Agility",
-    skill2: "Hitting",
-    skill3: "Pitching",
-  },
-  {
-    id: 1,
-    name: "Ali",
-    email: "ali@gmail.com",
-    accounttype: "Athlete",
-    sport: "Cricket",
-    skill1: "Right Arm Fast",
-    skill2: "Running",
-    skill3: "Catching",
-  },
-  {
-    id: 1,
-    name: "Fahad",
-    email: "fahad@gmail.com",
-    accounttype: "Coach",
-    sport: "Bxing",
-    skill1: "Accuracy",
-    skill2: "Chin",
-    skill3: "Cross",
-  },
-  {
-    id: 1,
-    name: "Talha",
-    email: "talha@gmail.com",
-    accounttype: "Athlete",
-    sport: "Cricket",
-    skill1: "Right Arm Fast",
-    skill2: "Running",
-    skill3: "Spin Bowl",
-  },
-  {
-    id: 1,
-    name: "Umair",
-    email: "umair@gmail.com",
-    accounttype: "Athlete",
-    sport: "Cricket",
-    skill1: "Right Arm Fast",
-    skill2: "Cordination",
-    skill3: "Running",
-  },
-  {
-    id: 1,
-    name: "Ahmad",
-    email: "ahmd@gmail.com",
-    accounttype: "Manager",
-    sport: "BaseBall",
-    skill1: "",
-    skill2: "",
-    skill3: "",
-  },
-  {
-    id: 1,
-    name: "pakistan",
-    email: "Zaid@gmail.com",
-    accounttype: "Athlete",
-    sport: "Cricket",
-    skill1: "Right Arm Fast",
-    skill2: "Running",
-    skill3: "Catching",
-  },
-  {
-    id: 1,
-    name: "pakistan",
-    email: "Zaid@gmail.com",
-    accounttype: "Athlete",
-    sport: "Cricket",
-    skill1: "Right Arm Fast",
-    skill2: "Running",
-    skill3: "Catching",
-  },
-  {
-    id: 1,
-    name: "pakistan",
-    email: "Zaid@gmail.com",
-    accounttype: "Athlete",
-    sport: "Cricket",
-    skill1: "Right Arm Fast",
-    skill2: "Running",
-    skill3: "Catching",
-  },
-  {
-    id: 1,
-    name: "pakistan",
-    email: "Zaid@gmail.com",
-    accounttype: "Athlete",
-    sport: "Cricket",
-    skill1: "Right Arm Fast",
-    skill2: "Running",
-    skill3: "Catching",
-  },
-];
+
 
 
 
@@ -248,7 +76,7 @@ const User = () => {
               </TableHead>
               <TableHead>
                 <TableRow>
-                  {columns.map((column) => (
+                  {header.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.align}
@@ -265,7 +93,7 @@ const User = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows
+                {userData
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => {
                     return (
@@ -406,7 +234,7 @@ const User = () => {
             //   rowsPerPageOptions={false}
             rowsPerPageOptions={[]}
             component="div"
-            count={rows.length}
+            count={userData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

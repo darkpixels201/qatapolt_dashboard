@@ -22,6 +22,9 @@ function CustomText({...props}) {
           }}
         >
           {props.title}
+          {/* <div style={{marginRight: props.spacebtw}} >
+          {props.title2}
+          </div> */}
           {props.value}
         </div>
       </div>

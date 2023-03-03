@@ -10,7 +10,8 @@ import ProductDetail from "../Screens/Dashboard/Products/ProductDetail";
 import ProductsList from "../Screens/Dashboard/Products/ProductsList";
 import Stock from "../Screens/Dashboard/Post";
 import User from "../Screens/Dashboard/User";
-import Trophies from "../Screens/Trophies";
+import Trophies from "../Screens/Dashboard/Trophy/Trophies";
+import TrophyDetail from "../Screens/Dashboard/Trophy/TrophyDetail";
 
 const DashboardRoutes = () => {
   const [sideBar, setSideBar] = useState(true)
@@ -32,6 +33,7 @@ const DashboardRoutes = () => {
             <Route path="user" element={<User />} />
             <Route path="post" element={<Stock />} />
             <Route path="trophy" element={<Trophies />} />
+            <Route path="trophy/:id" element={<TrophyDetail />} />
           </Routes>
         </div>
       </div>
