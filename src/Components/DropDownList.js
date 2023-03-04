@@ -4,6 +4,8 @@ import Spacer from "./CustomComponents/Spacer";
 import "../Assets/css/DropDown.css";
 import { colors } from "../utils/Colors";
 import { icons } from "../Assets/Icons";
+import { FiSettings } from "react-icons/fi";
+import { BiLogOut } from "react-icons/bi";
 
 const DropDownList = ({ SearchArray, Icon, Img }) => {
   const [open, setOpen] = useState(false);
@@ -62,44 +64,33 @@ const DropDownList = ({ SearchArray, Icon, Img }) => {
         <div
           className={`dropdown-menu ${open ? "active" : "inactive"}`}
           style={{
-            width: 150,
+            width: 130,
             borderRadius: 10,
             border: "solid",
             borderWidth: 1,
             borderColor: colors.grey,
+            padding: 20,
+            display: "flex",
+            flexDirection: "column",
+            cursor: "pointer",
+            // justifyContent:"space-evenly"
           }}
         >
-          <Spacer height={20} />
-          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-            <CustomText title="RESULTADOS" fontSize={10} />
-            <CustomText
-              title="Mostrando 3 de 25"
-              fontSize={8}
-              textAlign="center"
-            />
-          </div>
-          <Spacer height={20} />
           <div
-            style={{
-              height: 250,
-              overflowX: "hidden",
-              overflowY: "auto",
-              textAlign: "justify",
-            }}
+            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
           >
-            {SearchArray.map((item, index) => (
-              <div key={index}>
-                <DropdownItem
-                  text1={item.name1}
-                  text2={item.name2}
-                  text3={item.name3}
-                  img={item.image}
-                  price={item.price}
-                />
-              </div>
-            ))}
+            <FiSettings style={{ marginLeft: 2 }} color={colors.purple} />
+            <Spacer width={15} />
+            <CustomText title="Settings" fontSize={14} />
           </div>
-          {/* <Footer /> */}
+          <Spacer height={30} />
+          <div
+            style={{ display: "flex", alignItems: "center", cursor: "pointer" }}
+          >
+            <BiLogOut fontSize={20} color={colors.purple} />
+            <Spacer width={15} />
+            <CustomText title="Logout" fontSize={14} />
+          </div>
         </div>
       </div>
     </div>

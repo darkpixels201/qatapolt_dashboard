@@ -103,7 +103,7 @@ const TrophyDetail = () => {
                         ))}
                       </div>
                     </LightgalleryProvider> */}
-                    <LightgalleryProvider>
+                    <LightgalleryProvider className="">
                       <div
                         style={{
                           display: "flex",

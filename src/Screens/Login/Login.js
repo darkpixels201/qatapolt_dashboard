@@ -2,15 +2,45 @@ import React, { useState } from "react";
 // import { Blob } from "react-blob";
 import { HiOutlineMail } from "react-icons/hi";
 import { SlLock } from "react-icons/sl";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { icons } from "../../Assets/Icons";
 import CustomText from "../../Components/CustomComponents/CustomText";
 import Spacer from "../../Components/CustomComponents/Spacer";
 import FormComponent from "../../Components/FormComponent";
 import FormComponentText from "../../Components/FormComponentText";
+import FormValidation, { LoginValidation } from "../../Components/FormValidation";
 import { colors } from "../../utils/Colors";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [state, setState] = useState({
+    email:"",
+    password:"",
+  })
+
+  const email = state.email
+  const password = state.password
+
+  const [submitError ,setSubmitError] = useState({
+    emailError:"",
+    passwordError:"",
+  })
+
+  console.log("emailError",submitError.emailError)
+
+  const onSubmit = () => {
+    let response =  LoginValidation(
+      setSubmitError,
+      submitError,
+      email,
+      password
+    )
+   if(response) {
+    navigate("/dashboard");
+   } else {
+    console.log("Not Done")
+   }
+  }
   return (
     <div style={{}}>
       <Spacer height={130} />
@@ -52,6 +82,10 @@ const Login = () => {
               Icon={HiOutlineMail}
               name="Email"
               email
+              submitError={submitError}
+              setSubmitError={setSubmitError}
+              state={state}
+              setState={setState}
             />
 
             <FormComponentText
@@ -60,16 +94,21 @@ const Login = () => {
               name="Password"
               fontSize={16}
               loginPassword
+              password
+              submitError={submitError}
+              setSubmitError={setSubmitError}
+              state={state}
+              setState={setState}
             />
             <Spacer height={25} />
-            <Link
+            {/* <Link
               to="/dashboard"
               style={{
                 textDecoration: "none",
                 display: "flex",
                 justifyContent: "center",
               }}
-            >
+            > */}
               <div
                 style={{
                   width: "80%",
@@ -83,6 +122,7 @@ const Login = () => {
                   boxShadow: "2px 1px 15px -1px rgba(0,0,0,0.40)",
                   cursor: "pointer",
                 }}
+                onClick={ () => onSubmit()}
               >
                 <CustomText
                   title="Log In"
@@ -91,7 +131,7 @@ const Login = () => {
                   fontSize={15}
                 />
               </div>
-            </Link>
+            {/* </Link> */}
           </div>
         </div>
       </div>

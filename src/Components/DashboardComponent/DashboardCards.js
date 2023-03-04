@@ -51,7 +51,7 @@ const DashboardCards = () => {
           sm={4}
           md={2}
           key={index}
-          sx={{ display: "flex", justifyContent: "center" }}
+          sx={{ display: "flex", justifyContent: "center",  }}
         >
           <Box
             style={{
@@ -59,11 +59,12 @@ const DashboardCards = () => {
               width: "95%",
               backgroundColor: items.color,
               borderRadius: 10,
+              boxShadow: "0px 0px 8px -2px rgba(0,0,0,0.50)",
               // paddingLeft:20,
             }}
           >
-            <div style={{ width: "auto", padding: 18, paddingTop: 20 }}>
-              <div style={{ display: "flex", alignItems: "center" }}>
+            <div style={{ width: "auto", padding: 18, paddingTop: 20,   }}>
+              <div style={{ display: "flex", alignItems: "center",  }}>
                 <div
                   style={{
                     height: 30,

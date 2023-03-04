@@ -175,14 +175,14 @@ const DashboardCharts = () => {
               </Box>
               {/* <Spacer height={145} /> */}
               {item.bar ? (
-                <ResponsiveContainer width="100%" height="30%">
+                <ResponsiveContainer width="100%" height="30%" >
                   <BarChart
                     width={10}
                     height={40}
                     data={data}
                     margin={{
                         left: 0,
-                        bottom: 0,
+                        bottom: 1,
                       }}
                     style={{
                       display: "flex",
@@ -203,15 +203,17 @@ const DashboardCharts = () => {
               )}
 
               {item.stackedChart ? (
-                <ResponsiveContainer width="100%" height="30%">
+                <ResponsiveContainer width="100%" height="30%"  >
                   <AreaChart
                     width={730}
                     height={250}
                     data={data}
                     margin={{
                         left: 0,
-                        bottom: 0,
+                        bottom: 1,
                       }}
+                      outerRadius={12}
+                      innerRadius={12}
                     // margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
                   >
                     <Area
@@ -219,12 +221,14 @@ const DashboardCharts = () => {
                       dataKey="uv"
                       stroke="none"
                       fill={colors.orange1}
+                      style={{borderRadius:10}}
                     />
                     <Area
                       type="monotone"
                       dataKey="pv"
                       stroke="none"
                       fill={colors.orange1}
+                      style={{borderRadius:10}}
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -240,7 +244,7 @@ const DashboardCharts = () => {
                     data={data}
                     margin={{
                         left: 0,
-                        bottom: 0,
+                        bottom: 1,
                       }}
                     // margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
                   >

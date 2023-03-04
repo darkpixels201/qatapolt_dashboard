@@ -12,6 +12,7 @@ import Stock from "../Screens/Dashboard/Post";
 import User from "../Screens/Dashboard/User";
 import Trophies from "../Screens/Dashboard/Trophy/Trophies";
 import TrophyDetail from "../Screens/Dashboard/Trophy/TrophyDetail";
+import BreadCrumbs from "../Components/DashboardComponent/BreadCrumbs";
 
 const DashboardRoutes = () => {
   const [sideBar, setSideBar] = useState(true)
@@ -21,6 +22,7 @@ const DashboardRoutes = () => {
         <NavbarDashboard sideBar={sideBar} setSideBar={setSideBar} />
         <div style={{width:"100%"}} >
           <HeaderDashboard sideBar={sideBar} setSideBar={setSideBar} />
+          <BreadCrumbs />
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="products">

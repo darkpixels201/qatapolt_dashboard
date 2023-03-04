@@ -4,14 +4,18 @@ import { colors } from "../utils/Colors";
 import CustomText from "./CustomComponents/CustomText";
 import Spacer from "./CustomComponents/Spacer";
 
-
 const FormComponentText = ({
   placeholder,
   Icon,
   name,
   fontSize,
   loginPassword,
+  password,
   signUpPassword,
+  submitError,
+  setSubmitError,
+  state,
+  setState,
 }) => {
   const [show, setShow] = useState(true);
 
@@ -52,68 +56,47 @@ const FormComponentText = ({
           <Icon color={colors.grey1} size={fontSize || 20} />
         </div>
         <Spacer width={10} />
-        {loginPassword ? (
-          <>
-            <input
-              placeholder={placeholder}
-              style={{
-                // border: "none",
-                // borderColor: "none",
-                width: "60%",
-                outline: "none",
-                border: "none",
-                backgroundColor: colors.white,
-                fontSize: 13,
-                // fontSize: 15,
-              }}
+        <>
+          <input
+            required
+            type={show ? "password" : "text"}
+            placeholder={placeholder}
+            style={{
+              width: "80%",
+              outline: "none",
+              border: "none",
+              backgroundColor: colors.white,
+              fontSize: 13,
+            }}
+            onChange={(e) => {
+              setState({ ...state, password: e.target.value });
+              setSubmitError({ ...submitError, passwordError: "" });
+              // error: submitError.nameError,
+            }}
+          />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              cursor: "pointer",
+            }}
+            onClick={() => setShow(!show)}
+          >
+            <CustomText
+              title={show ? "Show" : "Hide"}
+              fontSize={12}
+              // color={colors.purple2}
             />
-            {/* <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <CustomText
-                title="Forgot Password ?"
-                fontSize={12}
-                color={colors.purple2}
-              />
-            </div> */}
-          </>
-        ) : signUpPassword ? (
-          <>
-            <input
-              required
-              type={show ? "password" : "text"}
-              placeholder={placeholder}
-              style={{
-                width: "80%",
-                outline: "none",
-                border: "none",
-                backgroundColor: colors.white,
-                fontSize: 13,
-              }}
-            />
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                cursor: "pointer",
-              }}
-              onClick={() => setShow(!show)}
-            >
-              <CustomText
-                title={show ? "Show" : "Hide"}
-                fontSize={12}
-                color={colors.purple2}
-              />
-            </div>
-          </>
-        ) : (
-          ""
-        )}
+          </div>
+        </>
+      </div>
+      <div style={{ padding: submitError.passwordError ? 1 : "" }}>
+        <CustomText
+          fontSize={11}
+          color={colors.lightRed}
+          title={submitError.passwordError ? submitError.passwordError : ""}
+        />
       </div>
     </div>
   );
