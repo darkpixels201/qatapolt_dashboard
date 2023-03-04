@@ -3,6 +3,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { colors } from "../utils/Colors";
 import CustomText from "./CustomComponents/CustomText";
 import Spacer from "./CustomComponents/Spacer";
+import '../Assets/css/style.css'
 
 const FormComponent = ({
   placeholder,
@@ -49,13 +50,14 @@ const FormComponent = ({
             alignItems: "center",
           }}
         >
-          <Icon color={colors.grey1} size={fontSize || 20} />
+          <Icon color={colors.lightGrey} size={fontSize || 20} />
         </div>
         <Spacer width={10} />
         <input
           required
           type="text"
           // value={email}
+          className="placeholderColor"
           name={email}
           placeholder={placeholder}
           onChange={(e) => {
@@ -71,6 +73,7 @@ const FormComponent = ({
             border: "none",
             backgroundColor: colors.white,
             fontSize: 13,
+            
             // fontSize: 15,
           }}
         />
@@ -85,5 +88,29 @@ const FormComponent = ({
     </div>
   );
 };
+
+// var styles = {
+//   base: {
+//     color: '#fff',
+
+//     // Adding interactive state couldn't be easier! Add a special key to your
+//     // style object (:hover, :focus, :active, or @media) with the additional rules.
+//     ':hover': {
+//       // background: color('#0074d9').lighten(0.2).hexString()
+//     },
+//     '::-webkit-input-placeholder': {
+//         // color: red;
+//         color: colors.red
+//     }
+//   },
+
+//   primary: {
+//     background: '#0074D9'
+//   },
+
+//   warning: {
+//     background: '#FF4136'
+//   }
+// };
 
 export default FormComponent;

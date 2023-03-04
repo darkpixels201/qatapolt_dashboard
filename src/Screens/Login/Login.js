@@ -125,7 +125,7 @@ const Login = () => {
                 onClick={ () => onSubmit()}
               >
                 <CustomText
-                  title="Log In"
+                  title="SIGN IN"
                   fontFamily={"bold"}
                   color={colors.white}
                   fontSize={15}

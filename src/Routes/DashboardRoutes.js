@@ -22,7 +22,7 @@ const DashboardRoutes = () => {
         <NavbarDashboard sideBar={sideBar} setSideBar={setSideBar} />
         <div style={{width:"100%"}} >
           <HeaderDashboard sideBar={sideBar} setSideBar={setSideBar} />
-          <BreadCrumbs />
+          {/* <BreadCrumbs /> */}
           <Routes>
             <Route path="" element={<Dashboard />} />
             <Route path="products">

@@ -3,6 +3,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { colors } from "../utils/Colors";
 import CustomText from "./CustomComponents/CustomText";
 import Spacer from "./CustomComponents/Spacer";
+import '../Assets/css/style.css'
 
 const FormComponentText = ({
   placeholder,
@@ -53,12 +54,13 @@ const FormComponentText = ({
             alignItems: "center",
           }}
         >
-          <Icon color={colors.grey1} size={fontSize || 20} />
+          <Icon color={colors.lightGrey} size={fontSize || 20} />
         </div>
         <Spacer width={10} />
         <>
           <input
             required
+            className="placeholderColor"
             type={show ? "password" : "text"}
             placeholder={placeholder}
             style={{

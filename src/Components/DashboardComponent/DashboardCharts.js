@@ -117,7 +117,7 @@ const DashboardCharts = () => {
     },
   ];
   return (
-    <Box sx={{ flexGrow: 1, marginTop: 10, paddingLeft: 3, paddingRight: 3 }}>
+    <Box sx={{ flexGrow: 1, marginTop: 5, paddingLeft: 3, paddingRight: 3 }}>
       <Grid
         container
         spacing={{ xs: 2, md: 4 }}
