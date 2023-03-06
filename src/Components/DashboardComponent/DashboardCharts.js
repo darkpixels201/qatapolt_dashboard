@@ -20,6 +20,8 @@ import {
   ComposedChart,
 } from "recharts";
 
+import '../../Assets/css/style.css'
+
 const DashboardCharts = () => {
   const data = [
     {
@@ -186,6 +188,7 @@ const DashboardCharts = () => {
                       }}
                     style={{
                       display: "flex",
+                      overflow:"hidder",
                       // flexDirection: "column",
                       // justifyContent: "flex-end",
                       // alignItems: "flex-end",
@@ -210,7 +213,7 @@ const DashboardCharts = () => {
                     data={data}
                     margin={{
                         left: 0,
-                        bottom: 1,
+                        // bottom: 1,
                       }}
                       outerRadius={12}
                       innerRadius={12}
@@ -221,14 +224,16 @@ const DashboardCharts = () => {
                       dataKey="uv"
                       stroke="none"
                       fill={colors.orange1}
-                      style={{borderRadius:10}}
+                      style={{borderRadius:10, overflow: "hidden"}}
+                      overflow={"hidden"}
                     />
                     <Area
                       type="monotone"
                       dataKey="pv"
                       stroke="none"
                       fill={colors.orange1}
-                      style={{borderRadius:10}}
+                      style={{borderRadius:10 }}
+                      overflow={"hidden"}
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -237,7 +242,7 @@ const DashboardCharts = () => {
               )}
 
               {item.strokeChart ? (
-                <ResponsiveContainer width="100%" height="30%">
+                <ResponsiveContainer width="100%" height="30%" className={"border-radius"}>
                   <AreaChart
                     width={730}
                     height={250}

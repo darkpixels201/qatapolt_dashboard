@@ -15,6 +15,7 @@ import "../../../Assets/css/lightGallery.css";
 
 import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
 import CustomButton from "../../../Components/CustomComponents/CustomButton";
+import { icons } from "../../../Assets/Icons";
 
 const TrophyDetail = () => {
   const { id } = useParams();
@@ -38,10 +39,19 @@ const TrophyDetail = () => {
     </div>
   );
 
+  const userDetail =[
+    { 
+      id:1,
+      text1:"Name",
+      text2:""
+    }
+  ]
+
   return (
     <>
       <Spacer height={30} />
       <div style={{ display: "flex", justifyContent: "center" }}>
+       
         <Grid
           container
           // item
@@ -60,6 +70,17 @@ const TrophyDetail = () => {
             alignItems: "center",
           }}
         >
+           <div style={{display:"flex", justifyContent:"center", width:"100%", alignItems:"center"}} >
+          <div>
+            <img src={icons.security} style={{height:40, width:40}} />
+          </div>
+          <Spacer width={10} />
+          <div>
+          <div  >
+          <CustomText title="User Authentication" fontSize={24} fontFamily={"bold"} textAlign="center" />
+          </div>
+          </div>
+        </div>
           {userData.map((item, index) => (
             <Grid container key={index}>
               {item.id == id ? (
@@ -67,7 +88,7 @@ const TrophyDetail = () => {
                   item
                   // md={12}
                   // xs={12}
-                  md={6}
+                  md={12}
                   xs={12}
                   style={
                     {
@@ -79,81 +100,69 @@ const TrophyDetail = () => {
                 >
                   <Grid item md={12}>
                     <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        // justifyContent: "space-evenly",
-        width: "100%",
-        flexWrap: "wrap",
-      }}
-    >
-                    {/* <LightgalleryProvider>
-                      <h1 style={{ textAlign: "center" }}>Photo Lightbulb</h1>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        {item.authimage.map((p) => (
-                          <PhotoItem key={p} image={p} group="group2" />
-                        ))}
-                      </div>
-                    </LightgalleryProvider> */}
-                    <LightgalleryProvider className="">
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          // justifyContent: "space-evenly",
-                          width: "100%",
-                          flexWrap: "wrap",
-                        }}
-                      >
-                        <PhotoItem
-                          key={item.id}
-                          image={item.authimg1}
-                          group="group1"
-                        />
-                        <PhotoItem
-                          key={item.id}
-                          image={item.authimg2}
-                          group="group1"
-                        />
-                      </div>
-                    </LightgalleryProvider>
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // justifyContent: "space-evenly",
+                        width: "100%",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <LightgalleryProvider className="">
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            // justifyContent: "space-evenly",
+                            width: "100%",
+                            flexWrap: "wrap",
+                          }}
+                        >
+                          <PhotoItem
+                            key={item.id}
+                            image={item.authimg1}
+                            group="group1"
+                          />
+                          <PhotoItem
+                            key={item.id}
+                            image={item.authimg2}
+                            group="group1"
+                          />
+                        </div>
+                      </LightgalleryProvider>
                     </div>
                   </Grid>
                   <Spacer height={20} />
-                  <Grid item md={12}>
-                    <div style={{ display: "flex" }}>
+                  <Grid item md={12}   >
+                    <div style={{ display: "flex", justifyContent:"space-between" }}>
                       <CustomText title={"Name:"} fontFamily={"medium"} />
                       <Spacer width={5} />
                       <CustomText title={item.name} />
                     </div>
-
+                          <div style={{width:"100%", height:2, backgroundColor:colors.grey}} />
                     <Spacer height={20} />
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", justifyContent:"space-between" }}>
                       <CustomText title={"Email:"} fontFamily={"medium"} />
                       <Spacer width={5} />
                       <CustomText title={item.email} />
                     </div>
                   </Grid>
+                  <div style={{width:"100%", height:2, backgroundColor:colors.grey}} />
 
                   <Spacer height={20} />
                   <Grid item md={12}>
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", justifyContent:"space-between" }}>
                       <CustomText title={"Sport:"} fontFamily={"medium"} />
                       <Spacer width={5} />
                       <CustomText title={item.sport} />
                     </div>
+                    <div style={{width:"100%", height:2, backgroundColor:colors.grey}} />
                     <Spacer height={20} />
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", justifyContent:"space-between" }}>
                       <CustomText
                         title={"Account type:"}
                         fontFamily={"medium"}
@@ -161,28 +170,32 @@ const TrophyDetail = () => {
                       <Spacer width={5} />
                       <CustomText title={item.accounttype} />
                     </div>
+                    <div style={{width:"100%", height:2, backgroundColor:colors.grey}} />
                   </Grid>
                   <Spacer height={20} />
                   <Grid item md={12}>
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", justifyContent:"space-between" }}>
                       <CustomText title={"Skill 1:"} fontFamily={"medium"} />
                       <Spacer width={5} />
                       <CustomText title={item.skill1} />
                     </div>
+                    <div style={{width:"100%", height:2, backgroundColor:colors.grey}} />
                     <Spacer height={20} />
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", justifyContent:"space-between" }}>
                       <CustomText title={"Skill 2:"} fontFamily={"medium"} />
                       <Spacer width={5} />
                       <CustomText title={item.skill2} />
                     </div>
+                    <div style={{width:"100%", height:2, backgroundColor:colors.grey}} />
                   </Grid>
                   <Spacer height={20} />
                   <Grid item md={12}>
-                    <div style={{ display: "flex" }}>
+                    <div style={{ display: "flex", justifyContent:"space-between" }}>
                       <CustomText title={"Skill 3:"} fontFamily={"medium"} />
                       <Spacer width={5} />
                       <CustomText title={item.skill3} />
                     </div>
+                    <div style={{width:"100%", height:2, backgroundColor:colors.grey}} />
                   </Grid>
                   <Spacer height={20} />
                 </Grid>
@@ -204,7 +217,9 @@ const TrophyDetail = () => {
             fontFamily={"medium"}
           />
         </Grid>
+
       </div>
+        <Spacer height={60} />
     </>
   );
 };

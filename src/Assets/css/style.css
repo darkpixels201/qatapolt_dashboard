@@ -10,3 +10,7 @@
 .placeholderColor::placeholder {
     color:#cacaca;
 }
+
+.border-radius {
+    border-radius: 200px !important;
+}

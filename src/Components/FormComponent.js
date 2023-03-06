@@ -22,7 +22,7 @@ const FormComponent = ({
         width: "auto",
         paddingLeft: 50,
         paddingRight: 50,
-        paddingTop: 30,
+        paddingTop: 10,
       }}
     >
       <div style={{ display: "flex", justifyContent: "flex-start" }}>
@@ -34,8 +34,8 @@ const FormComponent = ({
           display: "flex",
           flexDirection: "row",
           border: "solid",
-          borderWidth: 0.2,
-          borderColor: colors.grey3,
+          borderWidth: 1,
+          borderColor: colors.grey1,
           borderRadius: 2,
           height: 35,
           borderRadius: 10,

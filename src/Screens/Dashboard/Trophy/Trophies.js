@@ -120,7 +120,7 @@ const Trophies = () => {
                               borderWidth: 0.5,
                               display: "flex",
                               justifyContent: "center",
-                              width: 80,
+                              // width: 170,
                             }}
                           >
                             <Link to={`${row.id}`}>
