@@ -18,7 +18,7 @@ const DashboardRoutes = () => {
   const [sideBar, setSideBar] = useState(true)
   return (
     <div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: "flex", flexDirection: "row",}}>
         <NavbarDashboard sideBar={sideBar} setSideBar={setSideBar} />
         <div style={{width:"100%"}} >
           <HeaderDashboard sideBar={sideBar} setSideBar={setSideBar} />

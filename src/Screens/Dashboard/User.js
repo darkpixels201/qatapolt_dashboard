@@ -19,17 +19,10 @@ import { AiFillEye } from "react-icons/ai";
 import UserModal from "../../Components/Modal/UserModal";
 import { header, userData } from "../../utils/DataArray";
 
-
-
 function createData(name, code, population, size) {
   const density = population / size;
   return { name, code, population, size, density };
 }
-
-
-
-
-
 
 const User = () => {
   const [open, setOpen] = React.useState(false);
@@ -80,7 +73,7 @@ const User = () => {
                     <TableCell
                       key={column.id}
                       align={column.align}
-                      style={{ minWidth: column.minWidth }}
+                      // style={{ minWidth: column.minWidth }}
                     >
                       <CustomText
                         title={column.label}
@@ -187,43 +180,76 @@ const User = () => {
                           sx={{
                             borderColor: colors.grey,
                             borderWidth: 0.5,
-                            display: "flex",
+                            // display: "flex",
+                            // justifyContent:"center",
+                            // alignItems:"center",
+                            // alignSelf:"center"
                           }}
                         >
                           <div
                             style={{
-                              height: 22,
-                              width: 22,
-                              marginLeft: 10,
-                              backgroundColor: "rgb(225, 255, 252)",
+                              // // height: 22,
+                              // // width: 22,
+                              // // marginLeft: 10,
+                              // backgroundColor: "rgb(225, 255, 252)",
+                              // // display: "flex",
+                              // // justifyContent: "center",
+                              // // alignItems: "center",
+                              // // alignSelf: "center",
+                              // cursor: "pointer",
                               display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              alignSelf: "center",
-                              cursor: "pointer",
+                              justifyContent:"center"
                             }}
                             onClick={() => setOpen(!open)}
                           >
-                            <AiFillEye color={colors.green} />
+                            <div
+                              style={{
+                                backgroundColor: "rgb(225, 255, 252)",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                alignSelf: "center",
+                                cursor: "pointer",
+                              }}
+                            >
+                              <AiFillEye color={colors.green} />
+                            </div>
+                            <Spacer width={25} />
+                            <div
+                              style={{
+                                backgroundColor: "rgba(255, 51, 102, 0.05)",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                alignSelf: "center",
+                                cursor: "pointer",
+                              }}
+                            >
+                              <FaTrash color={colors.red} />
+                            </div>
                           </div>
-                            <Spacer width={15} />
-                          <div
+                          {/* <Spacer width={15} /> */}
+                          {/* <div
                             style={{
-                              height: 22,
-                              width: 22,
-                              marginLeft: 10,
+                              // height: 22,
+                              // width: 22,
+                              // marginLeft: 10,
                               backgroundColor: "rgba(255, 51, 102, 0.05)",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              alignSelf: "center",
+                              // display: "flex",
+                              // justifyContent: "center",
+                              // alignItems: "center",
+                              // alignSelf: "center",
                               cursor: "pointer",
                             }}
                           >
                             <FaTrash color={colors.red} />
-                          </div>
+                          </div> */}
                         </TableCell>
-                        <UserModal open={open}  onClose={handleClose} item={row} />
+                        <UserModal
+                          open={open}
+                          onClose={handleClose}
+                          item={row}
+                        />
                       </TableRow>
                     );
                   })}
