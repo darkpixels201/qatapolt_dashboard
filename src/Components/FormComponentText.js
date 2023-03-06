@@ -4,6 +4,7 @@ import { colors } from "../utils/Colors";
 import CustomText from "./CustomComponents/CustomText";
 import Spacer from "./CustomComponents/Spacer";
 import '../Assets/css/style.css'
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const FormComponentText = ({
   placeholder,
@@ -64,7 +65,7 @@ const FormComponentText = ({
             type={show ? "password" : "text"}
             placeholder={placeholder}
             style={{
-              width: "80%",
+              width: "84%",
               outline: "none",
               border: "none",
               backgroundColor: colors.white,
@@ -85,11 +86,7 @@ const FormComponentText = ({
             }}
             onClick={() => setShow(!show)}
           >
-            <CustomText
-              title={show ? "Show" : "Hide"}
-              fontSize={12}
-              // color={colors.purple2}
-            />
+              {show ? <AiFillEye fontSize={18} /> : <AiFillEyeInvisible fontSize={18}  />}
           </div>
         </>
       </div>
