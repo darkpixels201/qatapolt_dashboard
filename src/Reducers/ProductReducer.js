@@ -10,6 +10,7 @@ import {
   EDIT_PRODUCT,
   REMOVE_PRODUCT,
   PRODUCT_LIST,
+  FOOTBALL_LIST,
 } from "../Constant/ProductConstant";
 
 // Add, Edit, Remove, Show
@@ -72,9 +73,17 @@ export const productReducer = (state = { products: [] }, action) => {
     // case PRODUCT_LIST_FAIL:
     //   return { loading: false, error: action.payload };
 
+    case FOOTBALL_LIST : {
+      console.log("football football ///",action.payload)
+      return { footballs: action.payload}
+    }
+
     default:
       return state;
   }
+
+
+ 
 };
 
 // import productListArray from "../Components/ProductListArray";

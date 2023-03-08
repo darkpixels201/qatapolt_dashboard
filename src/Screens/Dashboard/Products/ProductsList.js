@@ -67,9 +67,13 @@ const useStyles = makeStyles({
 const ProductsList = () => {
   const dispatch = useDispatch();
   // const { products } = useSelector((state) => state.productCreateReducer)
-  const productList = useSelector((state) => state.productReducer);
-  const { products, deleteProducts } = productList;
-  console.log("+++ From ProductList", products);
+  const products = useSelector((state) => state.productReducer);
+  // const { products, deleteProducts } = productList;
+  // console.log("+++ From ProductList", products);
+
+  const footballs = useSelector((state) => state.productReducer);
+  console.log("=>=>=>=>=>footballs", footballs);
+
   const classes = useStyles();
 
   const Toast = Swal.mixin({
@@ -98,7 +102,7 @@ const ProductsList = () => {
 
   useEffect(() => {
     // listProduct(dispatch);
-  }, [productList, products]);
+  }, [products]);
 
   // let length = products.length;
 
@@ -130,7 +134,10 @@ const ProductsList = () => {
   const [user, setUser] = useState();
   const userCollectionRef = collection(db, "users");
 
-  console.log("ProductListUser", user);
+  // console.log("ProductListUser", user);
+
+  const [data, setData] = useState();
+
   // const userCollectionRef = collection(db, "users")
 
   // useEffect(() => {
@@ -147,12 +154,12 @@ const ProductsList = () => {
     const getUsers = async () => {
       const data = await getDocs(userCollectionRef);
       setUser(data.docs.map((doc) => ({ ...doc.data() })));
-      dispatch({type:PRODUCT_LIST, payload: user })
-      console.log("...user",user)
+      dispatch({ type: PRODUCT_LIST, payload: user });
+      console.log("...user", user);
       //  console.log("Data",user.name)
     };
     getUsers();
-  },[]);
+  }, []);
 
   // useEffect(() => {
   //   listProduct(dispatch, user);
@@ -161,6 +168,41 @@ const ProductsList = () => {
 
   // const response = listProduct(dispatch,user, setUser )
   // console.log("listProduct Response",response)
+
+  const api_key = "e97938cecab0475835c03e9c6a1940c4";
+
+  const football = () => {
+    fetch("https://v3.football.api-sports.io/fixtures?live=all", {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "v3.football.api-sports.io",
+        "x-rapidapi-key": api_key,
+      },
+    })
+      .then((res) => res.json())
+      .then(({ response }) => {
+        console.log("Responssesess", response);
+        dispatch({ type: "FOOTBALL_LIST", payload: response });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // const football = () => {
+  //   const options = {
+  //     method: 'GET',
+  //     headers: {
+  //       'X-RapidAPI-Key': 'bba9056550mshfa595b1bf856993p1f2e84jsn8a1e5a080f3b',
+  //       'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+  //     }
+  //   };
+    
+  //   fetch('https://api-football-v1.p.rapidapi.com/v3/timezone', options)
+  //     .then(response => response.json())
+  //     .then(response => console.log(response))
+  //     .catch(err => console.error(err));
+  // }
 
   return (
     <div
@@ -171,7 +213,8 @@ const ProductsList = () => {
         // backgroundColor: colors.lightgray,
       }}
     >
-      {user?.map((item, index) => {
+      <div onClick={() => football()}>onClick</div>
+      {/* {user?.map((item, index) => {
         return (
           <div>
             {item.name}
@@ -181,7 +224,25 @@ const ProductsList = () => {
             {item.skill3}
           </div>
         );
-      })}
+      })} */}
+
+      {Object.entries(footballs)?.map((item, index) => (
+        <div key={index}>
+          {console.log("footballs+footballs",item)}
+          <>
+          {/* {item.filter(() => )} */}
+          </>
+          {/* {Object.entries(item)?.map((data) => (
+            <div>
+              {console.log("data -------",data)}
+              {data?.map((items) => (
+                <>{console.log("data?.map", items)}</>
+              ))}
+            </div>
+          ))} */}
+          {/* {console.log("Object.entries(footballs)",item[1])} */}
+        </div>
+      ))}
       <TableContainer
         sx={{
           // border: "solid",
@@ -215,43 +276,43 @@ const ProductsList = () => {
           </TableRow>
         </TableHead> */}
           {/* {length > 0 ? ( */}
-            <>
-              <TableHead
-                sx={{
-                  // lineHeight:5,
-                  background: "linear-gradient(to right,#9cbefe, #f4f4f4)",
-                  boxShadow: "0.5px 0.5px 10px #6b9efd",
-                }}
-              >
-                <TableRow sx={{ height: 5 }}>
-                  {ProductTableCell.map((item, index) => (
-                    <TableCell
-                      key={index}
-                      sx={{ borderBottom: "none", fontFamily: "bold" }}
-                      align="center"
-                    >
-                      {item.name}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-
-              <TableBody>
-                <>{/* Product Map */}</>
-              </TableBody>
-            </>
-          {/* ) : ( */}
-            <div
-              style={{
-                height: "70vh",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
+          <>
+            <TableHead
+              sx={{
+                // lineHeight:5,
+                background: "linear-gradient(to right,#9cbefe, #f4f4f4)",
+                boxShadow: "0.5px 0.5px 10px #6b9efd",
               }}
             >
-              <img src={icons.emptyBox} style={{ height: 200, width: 200 }} />
-            </div>
+              <TableRow sx={{ height: 5 }}>
+                {ProductTableCell.map((item, index) => (
+                  <TableCell
+                    key={index}
+                    sx={{ borderBottom: "none", fontFamily: "bold" }}
+                    align="center"
+                  >
+                    {item.name}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              <>{/* Product Map */}</>
+            </TableBody>
+          </>
+          {/* ) : ( */}
+          <div
+            style={{
+              height: "70vh",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img src={icons.emptyBox} style={{ height: 200, width: 200 }} />
+          </div>
           {/* )} */}
         </Table>
       </TableContainer>
