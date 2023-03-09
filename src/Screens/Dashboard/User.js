@@ -28,6 +28,7 @@ const User = () => {
   const [open, setOpen] = React.useState(false);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(8);
+  const [modalData, setModalData] = React.useState({})
 
   const handleClose = () => {
     setOpen(false);
@@ -200,7 +201,13 @@ const User = () => {
                               display: "flex",
                               justifyContent:"center"
                             }}
-                            onClick={() => setOpen(!open)}
+                            onClick={() =>
+                              {
+                                setOpen(!open)
+                                // setModalData(row)
+                                // console.log("ModalData", modalData.name)
+                              }
+                            }
                           >
                             <div
                               style={{
@@ -212,7 +219,13 @@ const User = () => {
                                 cursor: "pointer",
                               }}
                             >
-                              <AiFillEye color={colors.green} />
+                              <AiFillEye color={colors.green} onMouseEnter={ () =>
+                              {
+                                setModalData(row)
+                                console.log("ModalData", modalData.name)
+                              }
+                                 
+                                 } />
                             </div>
                             <Spacer width={25} />
                             <div
@@ -248,7 +261,7 @@ const User = () => {
                         <UserModal
                           open={open}
                           onClose={handleClose}
-                          item={row}
+                          data={modalData}
                         />
                       </TableRow>
                     );

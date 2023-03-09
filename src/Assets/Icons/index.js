@@ -5,5 +5,7 @@ export const icons = {
     qataPoltLogo: require("./qataPoltLogo.png"),
     newspaper: require("./newspaper.png"),
     security: require("./security.png"),
+    detail: require("./detail.png"),
+    cross: require("./cross.png"),
     
 }
